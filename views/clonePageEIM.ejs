@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clone EIM config </title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/crud_EIM.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/crud_EIM.js"></script>
+
+  <body>
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+						<h2><a href="http://www.intranet.cg974.fr/"> <img src="/images/logo-cg974.png" class="rounded-lg" alt="Logo CG974" style="width:8%"; height:auto> </a></span> Détails <b>EIM</b></h2>
+					</div>
+					<div class="col-sm-6">
+
+					</div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+						<h1></h1>
+						<div class="alert alert-info" role="alert">
+							Exécution du script d'automatisation des configs des EIM en cours !
+						</div>
+                    </tr><tr>
+						<h1></h1>
+                        <p id="avertissement">* L'arrêt du script fermera votre navigateur. Veuillez vous assurer de sauvegarder tous les travaux sur vos navigateurs web avant d'arrêt le script.</p>
+						<a href="http://localhost:3000/stopClone" class="btn btn-danger" data-toggle="modal"><i class="fa fa-ban"></i> <span>Arrêter le script</span></a>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

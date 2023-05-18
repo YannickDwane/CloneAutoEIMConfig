@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detail des EIM </title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/crud_EIM.css">
+<link rel="stylesheet" type="text/css" href="/css/custom.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/crud_EIM.js"></script>
+ 
+<body>
+	<!-- Notification -->
+	<% if(notif_ajout.length > 0) { %>
+		<% if(notif_ajout == "EIM ajoute !") { %>
+	<div id="notif" class="alert alert-success alert-sm alert-dismissible pull-right">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong><%= notif_ajout %></strong>
+	</div>
+		<% } %>
+		<% if(notif_ajout == "EIM non ajoute !") { %>
+			<div id="notif" class="alert alert-danger alert-sm alert-dismissible pull-right">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong><%= notif_ajout %></strong>
+			</div>
+				<% } %>
+	<% } %>
+	<% if(notif_update.length > 0) { %>
+		<% if(notif_update == "EIM modifie !") { %>
+	<div id="notif" class="alert alert-success alert-sm alert-dismissible pull-right">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong><%= notif_update %></strong>
+	</div>
+		<% } %>
+		<% if(notif_update == "EIM non modifie !") { %>
+			<div id="notif" class="alert alert-danger alert-sm alert-dismissible pull-right">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong><%= notif_update %></strong>
+			</div>
+				<% } %>
+	<% } %>
+	<% if(notif_suppr.length > 0) { %>
+		<% if(notif_suppr == "EIM supprime !") { %>
+	<div id="notif" class="alert alert-success alert-sm alert-dismissible pull-right">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong><%= notif_suppr %></strong>
+	</div>
+		<% } %>
+		<% if(notif_suppr == "Echec de supression !") { %>
+			<div id="notif" class="alert alert-danger alert-sm alert-dismissible pull-right">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong><%= notif_suppr %></strong>
+			</div>
+				<% } %>
+	<% } %>
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+						<h2><a href="http://www.intranet.cg974.fr/"> <img src="/images/logo-cg974.png" class="rounded-lg" alt="Logo CG974" style="width:8%"; height:auto> </a></span> Détails <b>EIM</b></h2>
+					</div>
+					<% if(isconnected == "true") { %>
+					<div class="col-sm-6">
+						<a href="#addEIMModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter EIM</span></a>
+						<a href="#deleteEIMModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Supprimer</span></a>
+                        <a href="http://localhost:3000/sauvegardeEIM" class="btn btn-primary" data-toggle="modal"><i class="fa fa-clone"></i> <span>Cloner configuration</span></a>
+					</div>
+					<div class="col-sm-6">
+						<p></p>
+					</div>
+					<div class="col-sm-6">
+						<form id="form_ajoutEIM" action="/search" method="get" class="form-inline my-2 my-lg-0 pull-right">
+							<input class="form-control mr-sm-2" name="termeRecherche" type="search" placeholder="Rechercher">
+							<input class="btn btn-primary my-2 my-sm-0" id="btnRechercher" type="submit" value="Rechercher">
+						</form>
+					</div>
+					<% }; %> 
+                </div>
+            </div>
+			<% if(isconnected == "false") { %>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+						<th>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="selectAll">
+								<label for="selectAll"></label>
+							</span>
+						</th>
+                        <th>Numéro d'inventaire</th>
+                        <th>Adresse IP</th>
+						<th>Mot de passe d'administartion</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- appel des éléments de chaque table avec node.js & express.js -->
+					<% eim.forEach(function(eim){ %>
+                    <tr>
+						<td>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="checkbox1" name="options[]" value="1">
+								<label for="checkbox1"></label>
+							</span>
+						</td>
+                        <td><%= eim.eim_numinv %></td>
+                        <td><%= eim.eim_ip %></td>
+						<td><%= eim.eim_mdp %></td>
+                        <td>
+                            <a href="#editEIMModal" id="editEIM" data-id="<%= eim.eim_numinv %>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEIMModal" id="supprimerEIM" data-id="<%= eim.eim_numinv %>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+						</td>
+                    </tr>
+                    <!-- fin appel des elements -->
+					<% }); %>
+                </tbody>
+            </table>
+			<div class="clearfix">
+                <div class="hint-text"> <b>20</b> EIM affichés dans une page</div>
+                <ul class="pagination">
+					<% if(page > 1) { %><li class="page-item "><a href="/?page=<%=page-1%>" class="page-link">Précédent</a></li> <% } %>
+					<% for(let i = iterator; i <= finirLien; i++) { %>
+						<% if(i <= 0){ %><% continue; } %>
+						<% if(i === page && i >= 0){ %>
+						<li class="page-item active"><a href="/?page=<%=i%>" class="page-link"><%=i%></a></li>
+						<% continue; %>
+					<% } %>
+						<li class="page-item"><a href="/?page=<%=i%>" class="page-link"><%=i%></a></li>
+						<% } %>
+						<% if(page < numPages) { %><li class="page-item"><a href="/?page=<%=page+1%>" class="page-link">Suivant</a></li> <% } %>
+                </ul>
+            </div>
+			<% }; %>
+			<% if(isconnected == "") { %>
+				<div id="errormsg">
+					<div class="message message-warning alert alert-warning" role="status"><span trmsg="9">Veuillez vous authentifier</span>    
+					</div>
+				  </div>
+				  <div class="card">
+					<form id="lform" action="#" method="post" class="login" role="form"> 
+					  <input id="token" type="hidden" name="token" value="1684269473_22095">
+					  <div class="form">
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+							<span class="input-group-text"><label for="userfield" class="mb-0"><i class="fa fa-user"></i></label></span>
+						  </div>
+						  <input id="userfield" name="user" type="text" class="form-control" trplaceholder="login" required="" aria-required="true" placeholder="Identifiant" aria-label="Identifiant">
+						</div>
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+							<span class="input-group-text"><label for="passwordfield" class="mb-0"><i class="fa fa-lock"></i></label></span>
+						  </div>
+						  <input id="passwordfield" name="password" type="password" class="form-control" trplaceholder="password" required="" aria-required="true" placeholder="Mot de passe" aria-label="Mot de passe">   
+						  <div class="input-group-append">
+							  <span class="input-group-text"><i id="toggle_password" class="fa fa-eye-slash toggle-password"></i></span>
+						  </div>
+						</div>
+						<button type="submit" class="btn btn-success">
+						  <span class="fa fa-sign-in"></span>
+						  <span trspan="connect">Se connecter</span>
+						</button>
+					  </div>
+					</form>
+				  </div>
+			<% }; %>
+        </div>
+    </div>
+	<!-- ajouter EIM HTML -->
+	<div id="addEIMModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="form_ajoutEIM" action="/ajouterEIM" method="post">
+					<div class="modal-header">						
+						<h4 class="modal-title">Ajouter EIM</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div class="form-group">
+							<label for="numInv">Numéro d'inventaire</label>
+							<input type="number" name="numInv" class="form-control" maxlength="10" required>
+						</div>
+						<div class="form-group">
+							<label for="hote">Adresse IP</label>
+							<input type="text" name="hote" class="form-control"  maxlength="15"required>
+						</div>
+						<div class="form-group">
+							<label for="mdp">Mot de passe d'administartion</label>
+							<input type="password" id="mdp" name="mdp" class="form-control" maxlength="15" required>
+						</div>			
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+						<input type="submit" class="btn btn-success" value="Ajouter">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Editer EIM HTML -->
+	<div id="editEIMModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="form_editEIM" action="/ajouterEIM" method="post">
+					<div class="modal-header">						
+						<h4 class="modal-title">Editer EIM </h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div class="form-group">
+							<label>Numéro d'inventaire</label>
+							<input type="hidden" id="EditEIMid" class="form-control" value="">
+							<input type="number" id="EditnumInv" class="form-control" maxlength="10" value="" required>
+						</div>
+						<div class="form-group">
+							<label>Adresse IP </label>
+							<input type="text" id="Edithote" class="form-control"  maxlength="15"required>
+						</div>
+						<div class="form-group">
+							<label>Mot de passe d'administartion</label>
+							<input type="text" id="Editmdp" class="form-control" maxlength="15" required>
+						</div>					
+					</div>
+					<div class="modal-footer">
+						<input type="button" id="btnAnnulerEdit" class="btn btn-default" data-dismiss="modal" value="Annuler">
+						<input type="button" id="btnModifier" class="btn btn-info" value="Modifier">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Supprimer EIM HTML -->
+	<div id="deleteEIMModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form method="post" action="/supprimerEIM">
+					<div class="modal-header">						
+						<h4 class="modal-title">Supprimer EIM</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<p>Vous êtes sûr de vouloir supprimer l'EIM numéro <strong id="SupprEIMNumInv"></strong> du département de La Réunion ?</p>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" id="SupprEIMid" name="SupprEIMid" class="form-control" value="">
+						<input type="button" id="btnAnnulerSuppr" class="btn btn-default" data-dismiss="modal" value="Annuler">
+						<input type="submit" id="btnSupprimer" class="btn btn-danger" value="Supprimer">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

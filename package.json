@@ -1,0 +1,24 @@
+{
+  "name": "sauvegarde_auto_config_eim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Yannick RAKOTONIRINA",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.31.1"
+  },
+  "dependencies": {
+    "activedirectory": "^0.7.2",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1",
+    "trash": "^8.1.1",
+    "tree-kill": "^1.2.2"
+  }
+}

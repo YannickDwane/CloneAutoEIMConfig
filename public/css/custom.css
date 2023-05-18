@@ -1,0 +1,8 @@
+p {
+  font-size: 18px; /* Modifiez cette valeur selon vos besoins */
+}
+
+/* Cible une classe spécifique */
+.titre {
+  font-size: 24px; /* Modifiez cette valeur selon vos besoins */
+}
